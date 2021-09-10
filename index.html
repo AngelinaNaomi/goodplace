@@ -26,7 +26,7 @@
                 <h3>Adresse :</h3>
                 <div class="input-group input-group-xl mb-4">
                     <input type="text" class="form-control" id="address">
-                    <button type="button" class="btn btn-outline-primary" onclick="console.log('uwu');">Valider</button>
+                    <button type="button" class="btn btn-outline-primary" onclick="foo()">Valider</button>
                 </div>
 
             </div>
@@ -34,17 +34,29 @@
 
 
             <div class="column-ksr-lg">
-                <div class="text-xl-end text-center">
-                    <pre id='response'></pre>
+                <div class="text-xl-end text-center table-responsive">
+                    <table class="table table-xl table-striped table-dark table-hover">
+                        <thead>
+                            <tr>
+                                <th scope="col">The table header</th>
+                                <th scope="col">The table header</th>
+                            </tr>
+                        </thead>
+                        <tbody id="response">
+                            <tr>
+                                <th scope="row">The table body</th>
+                                <td>with two columns</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">The table body</th>
+                                <td>with two columns</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
     </div>
-
-    <script
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDxySETFYxZsileWPKXkbA8vN0dHo4fHlo&callback=initMap&libraries=&v=weekly"
-      async
-    ></script>
 
 
 </body>

@@ -1,33 +1,30 @@
-function initMap() {
-  // initialize services
-  const geocoder = new google.maps.Geocoder();
-  const service = new google.maps.DistanceMatrixService();
-  // build request
-  const origin1 = { lat: 55.93, lng: -3.118 };
-  const origin2 = "Greenwich, England";
-  const destinationA = "Stockholm, Sweden";
-  const destinationB = { lat: 50.087, lng: 14.421 };
-  const request = {
-    origins: [origin1, origin2],
-    destinations: [destinationA, destinationB],
-    travelMode: google.maps.TravelMode.DRIVING,
-    unitSystem: google.maps.UnitSystem.METRIC,
-    avoidHighways: false,
-    avoidTolls: false,
+function foo() {
+  var test = {
+    "origins": [
+      {
+        "point": {"latitude": 49.32734,"longitude": 5.92293}
+      }
+    ],
+    "destinations": [
+      {
+        "point": {"latitude": 49.13243,"longitude": 7.37698}
+      },
+      {
+        "point": {"latitude": 49.35698,"longitude": 5.98073}
+      }
+    ]
   };
-  // // put request on page
-  // document.getElementById("request").innerText = JSON.stringify(
-  //   request,
-  //   null,
-  //   2
-  // );
-  // get distance matrix response
-  service.getDistanceMatrix(request).then((response) => {
-    // put response
-    document.getElementById("response").innerText = JSON.stringify(
-      response,
-      null,
-      2
-    );
-  });
+
+
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+       if (this.readyState == 4 && this.status == 200) {
+         JSON.parse(this.responseText)
+         
+         document.getElementById('response').innerText = this.responseText
+       }
+  };
+  xhttp.open("POST", "https://api.tomtom.com/routing/1/matrix/sync/json?key=qgrvzjkhdi3EGPW4NZWirU7ibbPqqk96&routeType=fastest&travelMode=car&avoid=motorways", false);
+  xhttp.setRequestHeader("Content-type", "application/json");
+  xhttp.send(JSON.stringify(test));
 }
