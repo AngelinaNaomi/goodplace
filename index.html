@@ -20,40 +20,38 @@
 
 
     <div class="container">
-        <div class="container-ksr">
-            <div class="column-ksr-sm mb-5 text-xl-start text-center">
+        <div class="container-ksr text-xl-start text-center">
+            <h3>Adresse :</h3>
+            <div class="input-group input-group-xl mb-4">
+                <input type="text" class="form-control" id="address" value="49.532390989741145, 5.761397210304153">
+                <button type="button" class="btn btn-outline-primary" id='searchButton' onclick="search()">Valider</button>
+            </div>
+        </div>
 
-                <h3>Adresse :</h3>
-                <div class="input-group input-group-xl mb-4">
-                    <input type="text" class="form-control" id="address">
-                    <button type="button" class="btn btn-outline-primary" onclick="foo()">Valider</button>
-                </div>
-
+        <div class="container">
+            <div class="text-center table-responsive">
+                <table class="table table-xl table-striped table-dark table-hover" id='res'>
+                    <thead>
+                        <tr>
+                            <th scope="col">&nbsp</th>
+                            <th scope="col" colspan="2">Autoroute</th>
+                            <th scope="col" colspan="2">Sans Autoroute</th>
+                        </tr>
+                        <tr>
+                            <th scope="col">Collège</th>
+                            <th scope="col">Distance</th>
+                            <th scope="col">Temps</th>
+                            <th scope="col">Distance</th>
+                            <th scope="col">Temps</th>
+                        </tr>
+                    </thead>
+                    <tbody id="response">
+                    </tbody>
+                </table>
             </div>
 
-
-
-            <div class="column-ksr-lg">
-                <div class="text-xl-end text-center table-responsive">
-                    <table class="table table-xl table-striped table-dark table-hover">
-                        <thead>
-                            <tr>
-                                <th scope="col">The table header</th>
-                                <th scope="col">The table header</th>
-                            </tr>
-                        </thead>
-                        <tbody id="response">
-                            <tr>
-                                <th scope="row">The table body</th>
-                                <td>with two columns</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">The table body</th>
-                                <td>with two columns</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+            <div class="spinner-border text-light" role="status" hidden="true" id="spinner">
+                <span class="sr-only"></span>
             </div>
         </div>
     </div>
