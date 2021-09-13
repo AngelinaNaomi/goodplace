@@ -1,14 +1,30 @@
 function search() {
   document.getElementById('response').innerHTML = "";
-  document.getElementById('spinner').hidden = false;
-  document.getElementById("searchButton").disabled = true;
+  disable();
+  hideErrorFatal();
+  hideErrorPrint();
   const value = document.getElementById('address').value;
   const point = toCoordinate(value);
   if (point === undefined) {
+    printErrorPrint();
     enable();
   } else {
     calculate(point);
   }
+}
+
+function printErrorPrint() {
+  document.getElementById("errorInput").hidden = false;
+}
+function hideErrorPrint() {
+  document.getElementById("errorInput").hidden = true;
+}
+
+function printErrorFatal() {
+  document.getElementById("fatalError").hidden = false;
+}
+function hideErrorFatal() {
+  document.getElementById("fatalError").hidden = true;
 }
 
 function toCoordinate(value) {
@@ -30,8 +46,13 @@ function calculate(origin) {
 
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function () {
-    enable();
+    if(this.readyState == 4) {
+      enable();
+      printErrorFatal();
+    }
     if (this.readyState == 4 && this.status == 200) {
+      hideErrorFatal();
+      disable();
       const datas = JSON.parse(this.responseText);
       const matriceWithout = datas.matrix[0];
       f(input, matriceWithout)
@@ -47,10 +68,20 @@ function enable() {
   document.getElementById("searchButton").disabled = false;
 }
 
+function disable() {
+  document.getElementById('spinner').hidden = false;
+  document.getElementById("searchButton").disabled = true;
+}
+
 function f(input, matriceWithout) {
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function () {
+    if(this.readyState == 4) {
+      enable();
+      printErrorFatal();
+    }
     if (this.readyState == 4 && this.status == 200) {
+      hideErrorFatal();
       const datas = JSON.parse(this.responseText);
       const matriceWith = datas.matrix[0];
       for (let index = 0; index < matriceWith.length; index++) {
