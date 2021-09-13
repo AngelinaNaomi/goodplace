@@ -1,5 +1,10 @@
+var table = [];
+var order = 1;
+var previousSort = -1;
+
 function search() {
-  document.getElementById('response').innerHTML = "";
+  cleanTableHTML();
+  clearTable();
   disable();
   hideErrorFatal();
   hideErrorPrint();
@@ -11,6 +16,45 @@ function search() {
   } else {
     calculate(point);
   }
+}
+
+function addInTable(name, withM, withoutM) {
+  table.push({
+    name:name,
+    withM: withM,
+    withoutM: withoutM,
+    arrayShape: [name, withM.distance, withM.duree, withoutM.distance, withoutM.duree]
+  });
+}
+
+function clearTable() {
+  table = [];
+}
+
+function printTable(table) {
+  cleanTableHTML();
+  table.forEach(elem => {
+    addElement(elem.name, elem.withM, elem.withoutM);
+  })
+}
+
+function sort(mode) {
+  if(mode == previousSort) order *= -1;
+  table.sort((a, b) => {
+    if (a.arrayShape[mode] < b.arrayShape[mode]) {
+      return -1 * order;
+    } 
+    if (a.arrayShape[mode] > b.arrayShape[mode]){
+      return 1 * order;
+    }
+    return 0;
+  });
+  printTable(table);
+  previousSort = mode;
+}
+
+function cleanTableHTML() {
+  document.getElementById('response').innerHTML = "";
 }
 
 function printErrorPrint() {
@@ -89,8 +133,9 @@ function f(input, matriceWithout) {
         const objw = toSimpleObject(elementw);
         const element = matriceWithout[index].response.routeSummary;
         const obj = toSimpleObject(element);
-        addElement(myDb[index].name, objw, obj);
+        addInTable(myDb[index].name, objw, obj);
       }
+      printTable(table);
     }
   };
   xhttp.open("POST", "https://api.tomtom.com/routing/1/matrix/sync/json?key=qgrvzjkhdi3EGPW4NZWirU7ibbPqqk96&routeType=fastest&travelMode=car", true);
