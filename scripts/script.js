@@ -173,6 +173,7 @@ function toSimpleObject(elem) {
 
 const myDb = [
   { "name": 'Collège Longwy', "point": { "latitude": 49.53240304033028, "longitude": 5.761454952863941 } },
+  { "name": 'Boulot Sacha', "point": { "latitude": 49.56862828036542, "longitude": 6.081794614795097 } },
   { "name": 'Collège Algrange', "point": { "latitude": 49.37063420033846, "longitude": 6.058497979608342 } },
   { "name": 'Collège Audun-le-tiche', "point": { "latitude": 49.47300902268464, "longitude": 5.943999598667759 } },
   { "name": 'Collège Aumetz', "point": { "latitude": 49.42338117934902, "longitude": 5.948562037282614 } },
